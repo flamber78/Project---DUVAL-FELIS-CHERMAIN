@@ -4,6 +4,7 @@
 ;;All the definition/librairies
 
 (def Positif #{"yeah" "Y" "yes" "OK" "y" "ok" "Yes" "Yeah" "fine" "Fine" "Yep" "yep"})
+(def theactivity #{"walk" "sport" "skiing" "dogs" "restaurants" "playground" "parking" "biking" "wc" "attraction"})
 (def pragueparks #{:a "bertramka" "Bertramka" :b "frantiskanska-zahrada" "Frantiskanska Zahrada"  "Frantiskanska zahrada" "frantiskanska Zahrada" :c"obora-hvezda" "Obora Hvezda" "Obora hvezda" "obora Hvezda" :d"kampa" "Kampa" :e"kinskeho-zahrada" "Kinskeho Zahrada" :f"klamovka" "Klamovka" :g"ladronka" "Ladronka" :h"letna" "Letna" :i"petrin" "Petrin" :j"riegrovy-sady" "Riegrovy Sady" "riegrovy Sady" "Riegrovy sady" :k"stromovka " "Stromovka" :l"vysehrad" "Vysehrad"})
 (def exit #{"finish" "Finish" "End" "end" "Exit" "exit" "Stop" "stop" "Bye" "bye" "Quit" "quit" "Leave" "leave"})
 
@@ -23,7 +24,7 @@
   (println "What do you want to do today ?")
   (let  [a (read-line)]
     (cond
-      (contains? Positif y) (println "Ok I recommand you to go at a park to do that")
+      (contains? theactivity y) (println "Ok I recommand you to go at a park to do that")
       (contains? exit y) (exit-end))))
 
 
