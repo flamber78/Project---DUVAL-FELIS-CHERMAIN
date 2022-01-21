@@ -1,4 +1,5 @@
 (ns testprojet.core
+
   (:gen-class))
 
 ;;All the definition/librairies
@@ -6,17 +7,17 @@
 (def Positive #{"yeah" "Y" "yes" "OK" "y" "ok" "Yes" "Yeah" "fine" "Fine" "Yep" "yep"})
 (def No #{"N" "n" "No" "NO" "no" "Nope" "NOPE" "nope" "nop" "Nop" "NOP"})
 (def theactivity #{"walk" "Walk" "WALK" "walks" "WALKS" "Walks" "sport" "SPORT" "Sport" "Sports" "sports" "SPORTS" "skiing" "Skiing" "SKIING" "ski" "SKI" "Ski" "run" "Run" "RUN" "running" "Running" "RUNNING" "dogs" "Dogs" "DOGS" "dog" "Dog" "DOG" "restaurants" "Restaurants" "RESTAURANTS" "restaurant" "Restaurant" "RESTAURANT" "playground" "Playground" "PLAYGROUND" "playgrounds" "Playgrounds" "PLAYGROUNDS" "parking" "Parking" "PARKING" "Parkings" "parkings" "PARKINGS" "biking" "Biking" "BIKING"  "wc" "WC" "Wc" "attraction" "Attraction" "ATTRACTION" "attractions" "Attractions" "ATTRACTIONS" "bike" "Bike" "BIKE" "bikes" "Bikes" "BIKES"})
-(def bertramka #{ "bertramka" "BERTRAMKA" "Bertramka"})
-(def frantiskanska-zahrada #{"frantiskanska-zahrada" "Frantiskanska-Zahrada" "frantiskanska-Zahrada" "Frantiskanska-zahrada" "FRANTISKANSKA-ZAHRADA" "frantiskanska"  "FRANTISKANSKA" "Frantiskanska" "frantiskanskazahrada" "FRANTISKANSKAZAHARADA" })
+(def bertramka #{"bertramka" "BERTRAMKA" "Bertramka"})
+(def frantiskanska-zahrada #{"frantiskanska-zahrada" "Frantiskanska-Zahrada" "frantiskanska-Zahrada" "Frantiskanska-zahrada" "FRANTISKANSKA-ZAHRADA" "frantiskanska"  "FRANTISKANSKA" "Frantiskanska" "frantiskanskazahrada" "FRANTISKANSKAZAHARADA"})
 (def obora-hvezda #{"obora-hvezda" "Obora-hvezda" "obora-Hvezda" "OBORA-HVEZDA" "obora" "OBORA" "Obora" "hvzeda" "Hvzeda" "HVZEDA" "oborahvzeda" "OBORAHVZEDA" "OBORA HVZEDA" "Oborahvzeda" "obora hvzeda"})
-(def kampa #{ "kampa" "KAMPA" "Kampa"})
-(def kinskeho-zahrada #{"kinskeho-zahrada" "Kinskeho-zahrada" "kinskeho-Zahrada" "KINSEHO-ZAHRADA" "Kinseho" "kinseho" "KINSEHO" "kinseho zahrada" "Kinseko zahrada" "kinseko Zahrada" "KINSEHO ZAHRADA" "kinsehozahrada" "Kinsehozahrada" "KINSEHOZAHRADA" "kinskeho zahrada" })
+(def kampa #{"kampa" "KAMPA" "Kampa"})
+(def kinskeho-zahrada #{"kinskeho-zahrada" "Kinskeho-zahrada" "kinskeho-Zahrada" "KINSEHO-ZAHRADA" "Kinseho" "kinseho" "KINSEHO" "kinseho zahrada" "Kinseko zahrada" "kinseko Zahrada" "KINSEHO ZAHRADA" "kinsehozahrada" "Kinsehozahrada" "KINSEHOZAHRADA" "kinskeho zahrada"})
 (def klamovka #{"klamovka" "Klamovka" "KLAMOVKA"})
-(def ladronka #{ "ladronka" "Ladronka" "LADRONKA"})
+(def ladronka #{"ladronka" "Ladronka" "LADRONKA"})
 (def letna #{"letna" "LETNA" "Letna"})
 (def petrin #{"petrin" "Petrin" "PETRIN"})
 (def stromovka #{"stromovka" "Stromovka" "STROMOVKA"})
-(def vysehrad #{ "vysehrad" "Vysehrad" "VYSEHRAD"})
+(def vysehrad #{"vysehrad" "Vysehrad" "VYSEHRAD"})
 (def riegrovy-sady #{"riegrovy-sady" "Riegrovy-sady" "riegrovy-Sady" "RIEGROVY-SADY" "riegrovy sady" "Riegrovy sady" "riegrovy Sady" "RIEGROVY SADY" "riegrovysady" "Riegrovysady" "RIEGROVYSADY" "riegrovy" "Riegrovy" "RIEGTOVY" "sady" "Sady" "SADY"})
 (def exit #{"finish" "Finish" "End" "end" "Exit" "exit" "Stop" "stop" "Bye" "bye" "Quit" "quit" "Leave" "leave"})
 (def girl #{"girl" "Girl" "GIRL" "girls" "Girls" "GIRLS" "woman" "Woman" "WOMAN" "womans" "Womans" "WOMANS"})
@@ -161,7 +162,7 @@
       :else (end))))
 
 
-
+; This function will ask to the user if he is interested in the champion of ixtal
 (defn ixtalstart []
   (println "So you are interested in champion of ixtal. I will find the champion of ixtal for you")
   (let [u (read-line)]
@@ -171,43 +172,48 @@
       (contains? exit u) (exit-end2)
       :else (not_understand2))))
 
-;;entre champion de demacia couleur fille mec monstre le poste 
 
 
-type = (defn deductionixtal1 []
+;this function will ask to the user if the champion is a boy, girl or monster
+(defn deductionixtal1 []
   (ixtalstart)
   (println "Ok, the champion you're thinking of is that a girl, a boy or a monster")
-    (let [t (read-line)]
+  (let [t (read-line)]
     (cond
-      (contains? monster t) (println "Ok, so it's a monster")
-      (contains? girl t) (println "Ok, so it's a girl")
-      (contains? boy t) (println "Ok, so it's a boy ")
+      (contains? monster t) [(println "Ok, so it's a monster") (deductionixtal2 t)]
+      (contains? girl t) [(println "Ok, so it's a girl") (deductionixtal2 t)]
+      (contains? boy t) [(println "Ok, so it's a boy ") (deductionixtal2 t)]
       (contains? exit t) (exit-end3)
       :else (not_understand3))))
 
-(defn deductionixtal2 []
+;This function will ask about wich way the champion is most of the time,
+;it will retake the variable t and print the answer which can variate with the two variables
+(defn deductionixtal2 [t]
   (println "Ok, the champion you're thinking is on wich way most of the time?")
-    (let [s (read-line)]
+  (let [s (read-line)]
+    (cond
+      (contains? top s) (println "Ok, so it's a top laner")
+      (contains? jgl s) (println "Ok, so it's a jungle")
+      (contains? mid s) (println "Ok, so it's a mid laner ")
+      (contains? supp s) (println "Ok, so it's a support ")
+      (contains? exit s) (exit-end4)
+      :else (not_understand4))
+    (cond
+      [(contains? top s) (contains? monster t)] (println "The champion of ixtal you're thinking of is malphite"))
+    (cond
+      [(contains? jgl s) (contains? girl t)] (println "The champion of ixtal you're thinking of is nidalee"))
+    (cond
+      [(contains? mid s) (contains? monster t)] (println "The champion of ixtal you're thinking of is neeko"))
+    (cond
+      [(contains? mid s) (contains? girl t)] (println "The champion of ixtal you're thinking of is qiyana"))
+    (cond
+      [(contains? supp s) (contains? girl t)] (println "The champion of ixtal you're thinking of is zyra"))
       (cond
-        (contains? top s) ((println "Ok, so it's a top laner") (s) )
-        (contains? jgl s) (println "Ok, so it's a jungle")
-        (contains? mid s) (println "Ok, so it's a mid laner ")
-        (contains? supp s) (println "Ok, so it's a support ")
-        (contains? exit s) (exit-end4)
-        :else (not_understand4))))
+        [(contains? jgl s) (contains? boy t)] (println "The champion of ixtal you're thinking of is rengar"))))
 
 
 
-;;;finir type and lane et creer les possibilitees possibles des champions
-(defn deductionixtal3 [type, lane]
-  (println "Ok, i find your champion: ")
-  (cond
-      (contains? (type monster ) , (lane jgl)) (println "The champion of ixtal you're thingking of is rengar")
-))
-;;pbl d'output
-;; faire le programme de tree branch qui va essayer de donner la race de d'arbres et c 2 diff discuss
-
-;;Main programm
+;;Main programms
 
 (defn discusspark []
   (def surname "name")
@@ -225,6 +231,6 @@ type = (defn deductionixtal1 []
   (println "Hello ! Welcome to the park discovery chatbot ! What's your name?")
   (def surname (read-line))
   (println (str "Hi  " surname "  nice to meet you"))
-  (deductionixtal3 (deductionixtal1) (deductionixtal2)))
+  (deductionixtal1))
 
   ;;End
